@@ -418,7 +418,7 @@ Magma is fully compatible with popular frameworks like Laravel and Symfony.
 
 Because Magma handles Async Jobs by booting a background PHP process, if you use Magma within Laravel, you should point `setBootstrapPath()` to a custom bridge file that boots the Laravel Kernel, rather than `public/index.php`. 
 
-Check out the full [SKILL.md](SKILL.md) guidelines internally to see exactly how to write this bridge file and handle `artisan` properly inside your jobs.
+Check out the full [SKILL.md](.ai/skills/magma4telegram/SKILL.md) guidelines internally to see exactly how to write this bridge file and handle `artisan` properly inside your jobs.
 
 ## Advanced: Standalone Usage (MagmaSend Trait)
 
