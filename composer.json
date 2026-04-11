@@ -1,0 +1,20 @@
+{
+    "name": "irwinlopez1023/magma4telegram",
+    "description": "Magma 4 Telegram",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "irwinlopez1023\\Magma4telegram\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Irwin López",
+            "email": "irwin@srvclick.com"
+        }
+    ],
+    "require": {
+        "srvclick/scurlv2": "^1.1"
+    }
+}

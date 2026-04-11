@@ -1,0 +1,5 @@
+vendor
+composer.lock
+.idea/
+.gitignore
+runner_log.txt
