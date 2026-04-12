@@ -15,6 +15,12 @@ Magma4Telegram is a clean, modular, and intuitive routing framework for Telegram
 - **Modular & Clean Architecture**: Keep your code clean by isolating commands, conversations, and jobs in their own respective classes.
 - **Auto-Discovery**: Magma can automatically scan a directory and register all your command, conversation, and job classes dynamically without manual requires.
 
+## Installation
+
+```bash
+composer require irwinlopez1023/magma4telegram
+```
+
 ## Quick Start
 
 Initialize Magma by providing your Telegram Bot Token. You can let Magma discover your classes automatically.
