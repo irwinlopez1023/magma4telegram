@@ -9,7 +9,7 @@ try {
     Magma::autoDiscoverConversations(__DIR__ . '/Conversations', 'Conversations\\');
     Magma::autoDiscoverJobs(__DIR__ . '/Jobs', 'Jobs\\');
 
-    $botToken = 'BOT_TOKEN';
+    $botToken = '8699617734:AAExlcwKeeKJ3mjoEPFOJTBBLCPJbqWezjM';
     $magma = new Magma($botToken);
 
 }catch (Exception $exception){

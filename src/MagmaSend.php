@@ -52,6 +52,7 @@ trait MagmaSend{
     {
         $curl = new Scurl();
         $curl->url($this->getEndPoint($endpoint));
+        $curl->proxy("http://127.0.0.1:8888");
         if ($json) {
             $curl->headers(['Content-Type: application/json']);
             $curl->post()->parameters(json_encode($data));
@@ -142,6 +143,23 @@ trait MagmaSend{
             $data['parse_mode'] = $parseMode;
         }
         return $this->sendPostRequest('sendDocument', $data);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteTelegramMessage(string $chatId, string $messageId): Response
+    {
+        if (empty($chatId) || empty($messageId)) {
+            throw new Exception('Missing chatId or messageId');
+        }
+
+        $data = [
+            'chat_id' => $chatId,
+            'message_id' => $messageId
+        ];
+
+        return $this->sendPostRequest('deleteMessage', $data);
     }
 
     /**

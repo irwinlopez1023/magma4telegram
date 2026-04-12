@@ -15,7 +15,7 @@ abstract class MagmaConversation
     {
         $this->magma = $magma;
         $this->MagmaSetBotToken($magma->getBotToken());
-        $this->manager = new ConversationManager(Magma::getStoragePath());
+        $this->manager = ConversationManager::getInstance(Magma::getStoragePath());
         $this->chatId = $chatId;
         
         $state = $this->manager->getState($this->chatId);
@@ -24,9 +24,20 @@ abstract class MagmaConversation
         }
     }
 
-    public function ask(string $text): void
+    public function getLastMessageId(): ?string
     {
-        $this->sendTelegramMessage($this->chatId, $text);
+        return $this->data['_current_msg_id'] ?? null;
+    }
+
+    public function reset(): void
+    {
+        $this->data = [];
+        $this->manager->clearState($this->chatId);
+    }
+
+    public function ask(string $text, $replyMarkup = null): void
+    {
+        $this->sendTelegramMessage($this->chatId, $text, 'html', $replyMarkup);
     }
 
     public function next(string $methodName): void

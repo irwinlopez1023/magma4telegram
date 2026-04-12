@@ -5,12 +5,13 @@ use Exception;
 
 class ConversationManager
 {
+    private static ?self $instance = null;
     private string $storagePath;
 
     /**
      * @throws Exception
      */
-    public function __construct(?string $storagePath = null)
+    private function __construct(?string $storagePath = null)
     {
         $this->storagePath = $storagePath ?? __DIR__ . '/storage/conversations';
 
@@ -21,14 +22,36 @@ class ConversationManager
         }
     }
 
-    private function getFilePath(string $chatId): string
+    /**
+     * @throws Exception
+     */
+    public static function getInstance(?string $storagePath = null): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self($storagePath);
+        }
+        return self::$instance;
+    }
+
+    public static function resetInstance(): void
+    {
+        self::$instance = null;
+    }
+
+    public function getStoragePath(): string
+    {
+        return $this->storagePath;
+    }
+
+    public function getFilePath(string $chatId): string
     {
         return $this->storagePath . "/chat_{$chatId}.json";
     }
 
     public function hasActiveConversation(string $chatId): bool
     {
-        return file_exists($this->getFilePath($chatId));
+        $file = $this->getFilePath($chatId);
+        return file_exists($file);
     }
 
     public function getState(string $chatId): ?array
@@ -73,7 +96,16 @@ class ConversationManager
             fclose($fp);
             throw new Exception("Cannot acquire lock for file: {$file}");
         }
-        $written = fwrite($fp, json_encode($state, JSON_PRETTY_PRINT));
+        ftruncate($fp, 0);
+        rewind($fp);
+        $jsonContent = json_encode($state, JSON_PRETTY_PRINT);
+        if ($jsonContent === false) {
+            flock($fp, LOCK_UN);
+            fclose($fp);
+            throw new Exception("Cannot encode state to JSON");
+        }
+        $written = fwrite($fp, $jsonContent);
+        fflush($fp);
         flock($fp, LOCK_UN);
         fclose($fp);
         if ($written === false) {
@@ -86,6 +118,16 @@ class ConversationManager
         $file = $this->getFilePath($chatId);
         if (file_exists($file)) {
             unlink($file);
+        }
+    }
+
+    public function clearAllStates(): void
+    {
+        $files = glob($this->storagePath . '/chat_*.json');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
         }
     }
 }

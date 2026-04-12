@@ -1,0 +1,22 @@
+[2026-04-12 01:28:56] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:28:56] Sending new message for main
+[2026-04-12 01:28:57] Saved message_id: 804
+[2026-04-12 01:28:58] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:28:58] Sending new message for main
+[2026-04-12 01:28:59] Saved message_id: 806
+[2026-04-12 01:30:54] startWithDestroy called with: null
+[2026-04-12 01:30:54] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:30:54] Sending new message for main
+[2026-04-12 01:30:55] Saved message_id: 808
+[2026-04-12 01:30:56] startWithDestroy called with: null
+[2026-04-12 01:30:56] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:30:56] Sending new message for main
+[2026-04-12 01:30:56] Saved message_id: 810
+[2026-04-12 01:32:01] startWithDestroy called with: null
+[2026-04-12 01:32:01] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:32:01] Sending new message for main
+[2026-04-12 01:32:02] Saved message_id: 812
+[2026-04-12 01:32:03] startWithDestroy called with: null
+[2026-04-12 01:32:03] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 01:32:03] Sending new message for main
+[2026-04-12 01:32:04] Saved message_id: 814

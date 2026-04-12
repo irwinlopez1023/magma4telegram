@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules;
 
 use irwinlopez1023\Magma4telegram\Magma;
@@ -11,19 +10,24 @@ use Exception;
 class register extends MagmaCommand {
     use MagmaSend;
 
+    /**
+     * El comando que activa el flujo de registro.
+     */
     protected string $command = "/register";
+
+    /**
+     * Magma inyectará el ID del chat aquí.
+     */
     protected ?string $chatId = null;
 
     public function handle(): void
     {
         try {
-            // Creamos la instancia de Magma usando el token que el comando ya tiene inyectado
+            // Re-instanciamos Magma con el token para las dependencias de la conversación
             $magma = new Magma($this->botToken);
             
-            // Instanciamos la conversación pasando la instancia de Magma y el chatId
+            // Creamos e iniciamos la conversación
             $conversation = new RegistrationConversation($magma, $this->chatId);
-            
-            // Iniciamos el flujo de la conversación
             $conversation->start();
             
         } catch (Exception $e) {

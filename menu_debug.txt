@@ -1,0 +1,14 @@
+[01:30:54] chatId: 2135765484
+[01:30:54] previousMsgId: null
+[01:30:54] storagePath: C:/Users/irwin/Documents/Desarrollo/PHP/Magma4Telegram/src/storage/conversations/chat_2135765484.json
+[01:30:56] chatId: 2135765484
+[01:30:56] previousMsgId: null
+[01:30:56] storagePath: C:/Users/irwin/Documents/Desarrollo/PHP/Magma4Telegram/src/storage/conversations/chat_2135765484.json
+[01:32:01] chatId: 2135765484
+[01:32:01] previousMsgId: null
+[01:32:01] storagePath: C:/Users/irwin/Documents/Desarrollo/PHP/Magma4Telegram/src/storage/conversations/chat_2135765484.json
+[01:32:01] file_exists: no
+[01:32:03] chatId: 2135765484
+[01:32:03] previousMsgId: null
+[01:32:03] storagePath: C:/Users/irwin/Documents/Desarrollo/PHP/Magma4Telegram/src/storage/conversations/chat_2135765484.json
+[01:32:03] file_exists: no
