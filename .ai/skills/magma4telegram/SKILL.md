@@ -106,7 +106,7 @@ if (array_key_exists('enabled', $props) && $props['enabled'] === false) {
 
 ```php
 class interactivo extends MagmaCommand {
-    use MagmaSend, Interactable;
+    use MagmaSend;
 
     protected string $command = "/interactivo";
     protected ?string $chatId = null;
@@ -537,9 +537,9 @@ $this->sendTelegramMessage($this->chatId, "Choose an option:", 'html', $keyboard
 
 ---
 
-## 9. Interactive Callbacks (`Interactable` trait)
+## 9. Interactive Callbacks
 
-Use in command classes that need to respond to inline button presses.
+Use in command classes that need to respond to inline button presses. The `MagmaSend` trait includes `answerCallback()` for responding to button presses.
 
 ```php
 <?php
@@ -547,11 +547,10 @@ namespace Modules;
 
 use irwinlopez1023\Magma4telegram\MagmaCommand;
 use irwinlopez1023\Magma4telegram\MagmaSend;
-use irwinlopez1023\Magma4telegram\Interactable;
 use irwinlopez1023\Magma4telegram\Keyboard;
 
 class menu extends MagmaCommand {
-    use MagmaSend, Interactable;
+    use MagmaSend;
 
     protected string $command = "/menu";
     protected ?string $chatId = null;
@@ -586,9 +585,9 @@ class menu extends MagmaCommand {
 }
 ```
 
-**Interactable API:**
+**Callbacks API:**
 - `protected array $callbacks` maps each `callback_data` string to a method name in the same class.
-- `$this->answerCallback(string $text, $buttons = null, string $parseMode = 'html')` edits the original message using `$this->chatId` and `$this->incomingMessageId` (both auto-injected by Magma).
+- `$this->answerCallback(string $text, $buttons = null, string $parseMode = 'html')` (available via MagmaSend) edits the original message using `$this->chatId` and `$this->incomingMessageId`.
 
 ---
 

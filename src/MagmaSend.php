@@ -43,6 +43,21 @@ trait MagmaSend{
         return $this->sendPostRequest('editMessageText', $data);
     }
 
+    protected ?string $incomingMessageId = null;
+
+    protected function  answerCallback(string $text, $buttons = null, string $parseMode = 'html'): void
+    {
+        if (isset($this->chatId) && isset($this->incomingMessageId)) {
+            $this->editTelegramMessage(
+                $this->chatId,
+                $this->incomingMessageId,
+                $text,
+                $parseMode,
+                $buttons
+            );
+        }
+    }
+
 
     /**
      * @throws Exception

@@ -390,7 +390,7 @@ class test_job extends MagmaCommand {
 
 ## Creating Interactive Commands (Inline Buttons)
 
-If your command involves interactive inline keyboards, include the `Interactable` trait. This trait allows you to map specific button clicks (callback data) to methods in your class.
+If your command involves interactive inline keyboards, use the `MagmaSend` trait. This trait includes `answerCallback()` to respond to button clicks and map specific callback data to methods in your class.
 
 Define the `protected array $callbacks` to map a `callback_data` string to a method name.
 
@@ -401,11 +401,10 @@ namespace Modules;
 use irwinlopez1023\Magma4telegram\Keyboard;
 use irwinlopez1023\Magma4telegram\MagmaCommand;
 use irwinlopez1023\Magma4telegram\MagmaSend;
-use irwinlopez1023\Magma4telegram\Interactable;
 use Exception;
 
 class buttons extends MagmaCommand {
-    use MagmaSend, Interactable;
+    use MagmaSend;
 
     protected string $command = "/button {something} {something}";
     protected ?string $chatId = null;
@@ -432,8 +431,7 @@ class buttons extends MagmaCommand {
 
     public function confirm(): void
     {
-        // $this->answerCallback() is provided by the Interactable trait.
-        // It automatically edits the message to provide feedback and remove the buttons.
+        // $this->answerCallback() is provided by the MagmaSend trait.
         $this->answerCallback("You have successfully confirmed the action!");
     }
 
@@ -562,7 +560,7 @@ Through the `MagmaSend` trait, your command classes inherit various tools to int
 - `$this->deleteTelegramMessage(string $chatId, string $messageId)`
 - `$this->createProgressBar(string $chatId, string $text = "Loading...", int $size = 10): ProgressBar`
 
-The `Interactable` trait provides:
+The `MagmaSend` trait also provides:
 - `$this->answerCallback(string $text, $buttons = null, string $parseMode = 'html')` (Automatically uses the class's `$this->chatId` and `$this->incomingMessageId` to edit the interaction message).
 
 ## Proxy Support (Debugging)

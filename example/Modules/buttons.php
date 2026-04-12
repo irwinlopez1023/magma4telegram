@@ -4,11 +4,10 @@ namespace Modules;
 use irwinlopez1023\Magma4telegram\Keyboard;
 use irwinlopez1023\Magma4telegram\MagmaCommand;
 use irwinlopez1023\Magma4telegram\MagmaSend;
-use irwinlopez1023\Magma4telegram\Interactable;
 use Exception;
 
 class buttons extends MagmaCommand {
-    use MagmaSend, Interactable;
+    use MagmaSend;
     protected string $command = "/button {name}";
     protected ?string $chatId = null;
     protected array $callbacks = [
