@@ -83,6 +83,14 @@ class Magma {
         if ($isCommand || $isCallbackCommand) {
             $conversationManager = ConversationManager::getInstance(self::$storagePath);
             if ($conversationManager->hasActiveConversation($chatId)) {
+                $state = $conversationManager->getState($chatId);
+                if ($state && isset($state['data']['_current_msg_id'])) {
+                    try {
+                        $this->deleteTelegramMessage($chatId, $state['data']['_current_msg_id']);
+                    } catch (Throwable $e) {
+                        // Silent fail if message was already deleted
+                    }
+                }
                 $conversationManager->clearState($chatId);
             }
         }

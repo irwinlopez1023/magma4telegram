@@ -188,6 +188,106 @@ class register extends MagmaCommand {
 }
 ```
 
+## Multi-Level Menus
+
+For complex menus with submenus and navigation, extend `MagmaMenu` instead of `MagmaConversation`.
+
+**Key features:**
+- Define menus as methods returning button arrays
+- Navigate between menus with "back" button
+- Automatic message editing (no spam)
+- Previous menus are automatically deleted when starting a new one
+- Stack-based navigation history
+
+```php
+<?php
+namespace Conversations;
+
+use irwinlopez1023\Magma4telegram\MagmaMenu;
+
+class ColorMenuConversation extends MagmaMenu
+{
+    public function start(): void
+    {
+        $this->showMenu('main');
+    }
+
+    protected function menu_main(): array
+    {
+        return [
+            ['text' => '🔴 Red', 'callback' => 'red'],
+            ['text' => '🔵 Blue', 'callback' => 'blue'],
+            ['text' => '🟢 Green', 'callback' => 'green'],
+            ['text' => '🎨 More colors', 'callback' => 'more_colors'],
+        ];
+    }
+
+    protected function menu_more_colors(): array
+    {
+        return [
+            ['text' => '⚫ Black', 'callback' => 'black'],
+            ['text' => '⚪ White', 'callback' => 'white'],
+            ['text' => '🟠 Orange', 'callback' => 'orange'],
+            ['text' => '🔙 Back', 'callback' => '<<back'],
+        ];
+    }
+
+    protected function onMenuOptionSelected(string $option): void
+    {
+        $this->saveData('color', ucfirst($option));
+        $this->ask("You selected: " . ucfirst($option));
+        $this->closeMenu();
+    }
+}
+```
+
+**How it works:**
+1. `$this->showMenu('main')` displays the menu defined in `menu_main()`
+2. Button clicks are routed to `handleMenuResponse()`
+3. `<<back` callback navigates to the previous menu
+4. Other callbacks trigger `onMenuOptionSelected()`
+5. When a new command is executed, the previous menu message is automatically deleted
+
+**Menu array format:**
+- `['text' => 'Button Label', 'callback' => 'unique_id']` — inline button
+- `'<<back'` — special callback for back navigation
+
+**Navigation methods:**
+- `$this->showMenu('menu_name')` — display a menu
+- `$this->goBack()` — go to previous menu in stack
+- `$this->closeMenu()` — close menu and end conversation
+
+**Menu command example:**
+```php
+<?php
+namespace Modules;
+
+use irwinlopez1023\Magma4telegram\MagmaCommand;
+use irwinlopez1023\Magma4telegram\MagmaSend;
+use Conversations\ColorMenuConversation;
+use Exception;
+
+class menu extends MagmaCommand {
+    use MagmaSend;
+
+    protected string $command = "/menu";
+    protected ?string $chatId = null;
+
+    public function handle(): void
+    {
+        try {
+            $magma = new \irwinlopez1023\Magma4telegram\Magma($this->botToken);
+            $conversation = new ColorMenuConversation($magma, (string) $this->chatId);
+            $conversation->start();
+        } catch (Exception $e) {
+            error_log("Menu Command Error: " . $e->getMessage());
+        }
+    }
+}
+```
+
+**Note:** Magma automatically handles menu cleanup. When a user executes any command while a menu is active, Magma deletes the previous menu message before processing the new command.
+
 
 ## Background Jobs (Asynchronous Processing)
 
@@ -453,6 +553,7 @@ Through the `MagmaSend` trait, your command classes inherit various tools to int
 - `$this->sendTelegramVideo(string $chatId, string $video, ?string $caption = null, string $parseMode = 'html')`
 - `$this->sendTelegramDocument(string $chatId, string $document, ?string $caption = null, string $parseMode = 'html')`
 - `$this->editTelegramMessage(string $chatId, string $messageId, string $newMessage, string $parseMode = 'html')`
+- `$this->deleteTelegramMessage(string $chatId, string $messageId)`
 - `$this->createProgressBar(string $chatId, string $text = "Loading...", int $size = 10): ProgressBar`
 
 The `Interactable` trait provides:
