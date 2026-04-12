@@ -19,6 +19,33 @@ trait MagmaSend{
         return $this->telegramBotUrl."/".$endpoint;
     }
 
+    public function getLastMessageId(): ?string
+    {
+        return $this->messageId;
+    }
+
+    public function getLastMessage(): ?array
+    {
+        return $this->lastMessage;
+    }
+
+    public function editLastMessage(string $newMessage, string $parseMode = 'html', $replyMarkup = null): Response
+    {
+        if ($this->messageId === null || !isset($this->lastMessage['chat']['id'])) {
+            throw new Exception('No message to edit. Send a message first.');
+        }
+
+        return $this->editTelegramMessage(
+            (string) $this->lastMessage['chat']['id'],
+            $this->messageId,
+            $newMessage,
+            $parseMode,
+            $replyMarkup
+        );
+    }
+
+    private ?array $lastMessage = null;
+
 
     /**
      * @throws Exception
@@ -85,6 +112,7 @@ trait MagmaSend{
             if (isset($result['result']['message_id'])) {
                 $this->messageId = $result['result']['message_id'];
             }
+            $this->lastMessage = $result['result'] ?? null;
         }
 
         return $response;
