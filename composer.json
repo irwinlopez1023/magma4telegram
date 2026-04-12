@@ -15,6 +15,7 @@
         }
     ],
     "require": {
-        "srvclick/scurlv2": "^2.0.2"
+        "srvclick/scurlv2": "^2.0.2",
+      "ext-json": "*"
     }
 }

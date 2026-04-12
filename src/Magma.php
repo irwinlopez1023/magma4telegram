@@ -16,6 +16,15 @@ class Magma {
     public static array $magma = [];
     private static bool $isHandling = false;
     private static ?string $storagePath = null;
+    private static ?string $proxyUrl = null;
+
+    public static function setProxy(?string $proxy): void {
+        self::$proxyUrl = $proxy;
+    }
+
+    public static function getProxy(): ?string {
+        return self::$proxyUrl;
+    }
 
     /**
      * @throws Exception

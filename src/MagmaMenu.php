@@ -241,6 +241,19 @@ abstract class MagmaMenu extends MagmaConversation
         $this->end();
     }
 
+    protected function respond(string $message, string $parseMode = 'html'): void
+    {
+        $currentMsgId = $this->getData(self::CURRENT_MESSAGE_ID_KEY);
+        
+        if ($currentMsgId) {
+            $this->editTelegramMessage($this->chatId, $currentMsgId, $message, $parseMode);
+        } else {
+            $this->ask($message);
+        }
+        
+        $this->closeMenu();
+    }
+
     protected function onMenuOptionSelected(string $option): void
     {
     }

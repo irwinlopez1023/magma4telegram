@@ -358,6 +358,17 @@ Sends the initial progress bar message and returns a `ProgressBar` instance for 
 
 > **Standalone use warning:** If `MagmaSend` is used outside a routed execution (e.g., in a plain service class), the bot token is NOT injected automatically. You MUST call `$this->MagmaSetBotToken('YOUR_TOKEN')` before any send method. The same applies inside Jobs.
 
+**Proxy Support (Debugging)**
+For debugging network requests through a proxy (e.g., Charles Proxy, Mitmproxy), configure in `webhook.php`:
+
+```php
+use irwinlopez1023\Magma4telegram\Magma;
+
+Magma::setProxy('http://127.0.0.1:8888');
+```
+
+The proxy is automatically injected into all Commands, Jobs, and Conversations. Pass `null` or don't call `setProxy()` to disable.
+
 ---
 
 ## 6. Progress Bars (Synchronous)

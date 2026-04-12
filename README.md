@@ -558,3 +558,15 @@ Through the `MagmaSend` trait, your command classes inherit various tools to int
 
 The `Interactable` trait provides:
 - `$this->answerCallback(string $text, $buttons = null, string $parseMode = 'html')` (Automatically uses the class's `$this->chatId` and `$this->incomingMessageId` to edit the interaction message).
+
+## Proxy Support (Debugging)
+
+For debugging network requests through a proxy (e.g., Charles Proxy, Mitmproxy), configure it in your `webhook.php`:
+
+```php
+use irwinlopez1023\Magma4telegram\Magma;
+
+Magma::setProxy('http://127.0.0.1:8888');
+```
+
+To disable the proxy, simply don't call `setProxy()` or pass `null`.

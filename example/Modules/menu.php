@@ -1,6 +1,7 @@
 <?php
 namespace Modules;
 
+use irwinlopez1023\Magma4telegram\Magma;
 use irwinlopez1023\Magma4telegram\MagmaCommand;
 use irwinlopez1023\Magma4telegram\MagmaSend;
 use Conversations\MenuDemoConversation;
@@ -16,7 +17,7 @@ class menu extends MagmaCommand {
     {
         try {
             $chatId = (string) $this->chatId;
-            $magma = new \irwinlopez1023\Magma4telegram\Magma($this->botToken);
+            $magma = new Magma($this->botToken);
             
             // Iniciamos la conversación. Magma ya se encargó de limpiar el estado
             // y borrar el mensaje anterior en el núcleo (src/Magma.php).

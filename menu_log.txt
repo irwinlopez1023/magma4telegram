@@ -1,0 +1,41 @@
+[2026-04-12 02:27:25] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:27:25] Sending new message for main
+[2026-04-12 02:27:48] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:27:48] Sending new message for main
+[2026-04-12 02:27:51] Saved message_id: 831
+[2026-04-12 02:27:54] handleMenuResponse: 'more_colors'
+[2026-04-12 02:27:54] Stack: ["main"]
+[2026-04-12 02:27:54] Current menu: main
+[2026-04-12 02:27:54] Found callback: more_colors
+[2026-04-12 02:27:54] Navigating to submenu: more_colors
+[2026-04-12 02:27:54] showMenu(more_colors), currentMsgId: 831, initStack: false
+[2026-04-12 02:27:54] Editing message 831
+[2026-04-12 02:27:57] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:27:57] Sending new message for main
+[2026-04-12 02:27:58] Saved message_id: 833
+[2026-04-12 02:31:27] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:31:27] Sending new message for main
+[2026-04-12 02:31:28] Saved message_id: 839
+[2026-04-12 02:37:43] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:37:43] Sending new message for main
+[2026-04-12 02:38:00] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:38:00] Sending new message for main
+[2026-04-12 02:38:01] Saved message_id: 860
+[2026-04-12 02:38:02] handleMenuResponse: 'verde'
+[2026-04-12 02:38:02] Stack: ["main"]
+[2026-04-12 02:38:02] Current menu: main
+[2026-04-12 02:38:02] Found callback: verde
+[2026-04-12 02:38:05] showMenu(main), currentMsgId: null, initStack: true
+[2026-04-12 02:38:05] Sending new message for main
+[2026-04-12 02:38:06] Saved message_id: 862
+[2026-04-12 02:38:07] handleMenuResponse: 'more_colors'
+[2026-04-12 02:38:07] Stack: ["main"]
+[2026-04-12 02:38:07] Current menu: main
+[2026-04-12 02:38:07] Found callback: more_colors
+[2026-04-12 02:38:07] Navigating to submenu: more_colors
+[2026-04-12 02:38:07] showMenu(more_colors), currentMsgId: 862, initStack: false
+[2026-04-12 02:38:07] Editing message 862
+[2026-04-12 02:38:10] handleMenuResponse: 'naranja'
+[2026-04-12 02:38:10] Stack: ["main","more_colors"]
+[2026-04-12 02:38:10] Current menu: more_colors
+[2026-04-12 02:38:10] Found callback: naranja

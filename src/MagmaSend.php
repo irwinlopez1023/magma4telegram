@@ -52,7 +52,11 @@ trait MagmaSend{
     {
         $curl = new Scurl();
         $curl->url($this->getEndPoint($endpoint));
-        $curl->proxy("http://127.0.0.1:8888");
+        
+        if (Magma::getProxy() !== null) {
+            $curl->proxy(Magma::getProxy());
+        }
+        
         if ($json) {
             $curl->headers(['Content-Type: application/json']);
             $curl->post()->parameters(json_encode($data));

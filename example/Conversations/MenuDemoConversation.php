@@ -34,16 +34,9 @@ class MenuDemoConversation extends MagmaMenu
     {
         $this->saveData('color', ucfirst($option));
         
-        $currentMsgId = $this->getData('_current_msg_id');
         $summary = "✅ <b>Selección Completada</b>\n\n" .
                    "🎨 Color: " . ucfirst($option);
         
-        if ($currentMsgId) {
-            $this->editTelegramMessage($this->chatId, $currentMsgId, $summary, 'html');
-        } else {
-            $this->ask($summary);
-        }
-        
-        $this->closeMenu();
+        $this->respond($summary);
     }
 }
